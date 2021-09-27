@@ -6,6 +6,7 @@ using namespace std::placeholders;
 ChatServer::ChatServer(EventLoop * loop, const InetAddress & listenAddr):
 server_(loop,listenAddr,"ChatServer"),
 //todo:为什么codec要在这里初始化，和explicit有什么关系吗
+//explicit要求该对象只能显式初始化，而没有默认初始化
 codec_(bind(&ChatServer::onStringMessage, this, _1, _2, _3))
 {
 	server_.setConnectionCallback(bind(&ChatServer::onMessage, this, _1));
