@@ -33,5 +33,6 @@ void ChatServer::onMessage(const TcpConnectionPtr & conn)
 void ChatServer::onStringMessage(const TcpConnectionPtr & conn, const string & msg, Timestamp receiveTime)
 {
 	for (auto connection : connectionList_)
-		codec_.send(connection, msg);
+		if(conn!=connection)
+			codec_.send(connection, msg);
 }
